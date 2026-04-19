@@ -16,7 +16,7 @@ Agent({ description: "Resolve identity", prompt: "Use the Skill tool to invoke s
 ```
 
 Parse from date output: `DATE`, `DATE_LABEL`.
-Parse from identity output: `GITHUB_USER`, `SLACK_USER_ID`, `CALENDAR_ID`, `TIMEZONE`.
+Parse from identity output: `GITHUB_USER`, `GITHUB_ORG`, `SLACK_USER_ID`, `CALENDAR_ID`, `TIMEZONE`.
 
 ## Step 2 — Fetch all data sources in parallel
 
@@ -24,13 +24,13 @@ Send all 5 agents in a **single message** so they run concurrently. Embed the re
 
 ```
 Agent({ description: "Calendar", prompt: "Use the Skill tool to invoke skill='work-calendar' with args='DATE'. CALENDAR_ID=<CALENDAR_ID>, TIMEZONE=<TIMEZONE> — use these directly, skip self-resolution. Return the complete output verbatim." })
-Agent({ description: "GitHub",   prompt: "Use the Skill tool to invoke skill='work-github'   with args='DATE'. GITHUB_USER=<GITHUB_USER> — use this directly, skip self-resolution. Return the complete output verbatim." })
+Agent({ description: "GitHub",   prompt: "Use the Skill tool to invoke skill='work-github'   with args='DATE'. GITHUB_USER=<GITHUB_USER>, GITHUB_ORG=<GITHUB_ORG> — use these directly, skip self-resolution. Return the complete output verbatim." })
 Agent({ description: "Jira",     prompt: "Use the Skill tool to invoke skill='work-jira'     with args='DATE'. Return the complete output verbatim." })
 Agent({ description: "Slack",    prompt: "Use the Skill tool to invoke skill='work-slack'    with args='DATE'. SLACK_USER_ID=<SLACK_USER_ID> — use this directly, skip self-resolution. Return the complete output verbatim." })
 Agent({ description: "Gmail",    prompt: "Use the Skill tool to invoke skill='work-gmail'    with args='DATE'. Return the complete output verbatim." })
 ```
 
-Replace `<CALENDAR_ID>`, `<TIMEZONE>`, `<GITHUB_USER>`, `<SLACK_USER_ID>` with the actual resolved values before spawning.
+Replace `<CALENDAR_ID>`, `<TIMEZONE>`, `<GITHUB_USER>`, `<GITHUB_ORG>`, `<SLACK_USER_ID>` with the actual resolved values before spawning.
 
 If any agent fails or returns empty, skip that section silently.
 
