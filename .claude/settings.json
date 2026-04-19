@@ -32,6 +32,8 @@
       "mcp__centy__centy_v1_CentyDaemon_SearchItems",
       "mcp__centy__centy_v1_CentyDaemon_CreateItem",
       "mcp__centy__centy_v1_CentyDaemon_UpdateItem",
+      "mcp__fathom__list_meetings",
+      "mcp__fathom__get_identity",
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
