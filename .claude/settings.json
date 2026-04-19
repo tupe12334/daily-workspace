@@ -7,6 +7,7 @@
       "Bash(gh label:*)",
       "Bash(gh *)",
       "Skill(work-daily)",
+      "Skill(work-fathom)",
       "Skill(work-date-resolver)",
       "Skill(work-github)",
       "Skill(work-calendar)",
@@ -33,7 +34,8 @@
       "mcp__centy__centy_v1_CentyDaemon_UpdateItem",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "WebSearch"
     ]
   }
 }

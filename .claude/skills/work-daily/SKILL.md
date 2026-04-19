@@ -1,6 +1,6 @@
 ---
 name: work-daily
-description: Generate a personal daily work summary. Aggregates calendar meetings, GitHub commits and PRs, Jira tickets, Slack highlights, and key emails into one structured digest for any given day.
+description: Generate a personal daily work summary. Aggregates calendar meetings, Fathom recordings, GitHub commits and PRs, Jira tickets, Slack highlights, and key emails into one structured digest for any given day.
 argument-hint: "[date — 'today', 'yesterday', or 'YYYY-MM-DD'; defaults to today]"
 ---
 
@@ -20,10 +20,11 @@ Parse from identity output: `GITHUB_USER`, `GITHUB_ORG`, `SLACK_USER_ID`, `CALEN
 
 ## Step 2 — Fetch all data sources in parallel
 
-Send all 5 agents in a **single message** so they run concurrently. Embed the resolved identity values directly in each prompt so sub-skills skip their own resolution:
+Send all 6 agents in a **single message** so they run concurrently. Embed the resolved identity values directly in each prompt so sub-skills skip their own resolution:
 
 ```
 Agent({ description: "Calendar", prompt: "Use the Skill tool to invoke skill='work-calendar' with args='DATE'. CALENDAR_ID=<CALENDAR_ID>, TIMEZONE=<TIMEZONE> — use these directly, skip self-resolution. Return the complete output verbatim." })
+Agent({ description: "Fathom",   prompt: "Use the Skill tool to invoke skill='work-fathom'   with args='DATE'. Return the complete output verbatim." })
 Agent({ description: "GitHub",   prompt: "Use the Skill tool to invoke skill='work-github'   with args='DATE'. GITHUB_USER=<GITHUB_USER>, GITHUB_ORG=<GITHUB_ORG> — use these directly, skip self-resolution. Return the complete output verbatim." })
 Agent({ description: "Jira",     prompt: "Use the Skill tool to invoke skill='work-jira'     with args='DATE'. Return the complete output verbatim." })
 Agent({ description: "Slack",    prompt: "Use the Skill tool to invoke skill='work-slack'    with args='DATE'. SLACK_USER_ID=<SLACK_USER_ID> — use this directly, skip self-resolution. Return the complete output verbatim." })
@@ -36,7 +37,7 @@ If any agent fails or returns empty, skip that section silently.
 
 ## Step 3 — Synthesize and render
 
-Parse each provider's structured block (`CALENDAR_RESULT`, `GITHUB_RESULT`, `JIRA_RESULT`, `SLACK_RESULT`, `GMAIL_RESULT`) and compose the final digest. Omit any section with no data.
+Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GITHUB_RESULT`, `JIRA_RESULT`, `SLACK_RESULT`, `GMAIL_RESULT`) and compose the final digest. Omit any section with no data. If `FATHOM_RESULT` contains `ERROR:`, skip the Fathom section silently.
 
 **Formatting rules:**
 - Sort meetings by start time
@@ -44,6 +45,7 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `GITHUB_RESULT`, `JIR
 - Separate Authored / Reviewed PR sub-tables; omit sub-table if empty
 - Skip Slack bot noise and single-emoji threads
 - Skip email newsletters and auto-notifications
+- For Fathom: show summaries as blockquotes; group action items under each meeting title; omit meeting if summary and action items are both empty
 
 ```
 # Daily Summary — DATE_LABEL
@@ -53,6 +55,12 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `GITHUB_RESULT`, `JIR
 |------|-------|----------|
 | HH:MM | Title | Xm |
 > (Key note for events with a description)
+
+## Meeting Recordings (N)  ← from Fathom; omit section if 0 recordings
+**[Meeting Title](recording_url)** — Xm
+> Summary key points (condensed to 2–3 sentences)
+- [ ] Action item 1 (assignee)
+- [ ] Action item 2
 
 ## Code Shipped
 ### Commits (N)
@@ -81,7 +89,7 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `GITHUB_RESULT`, `JIR
 - **←** Subject ← Sender — action required
 
 ## Day at a Glance
-**N** meetings · **N** commits · **N** PRs · **N** Jira tickets · **N** Slack threads · **N** emails
+**N** meetings · **N** recordings · **N** commits · **N** PRs · **N** Jira tickets · **N** Slack threads · **N** emails
 ```
 
 ## Final Step — Background skill review

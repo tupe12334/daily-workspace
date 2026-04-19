@@ -1,5 +1,12 @@
 {
   "mcpServers": {
+    "fathom": {
+      "command": "npx",
+      "args": [
+        "mcp-remote@latest",
+        "https://api.fathom.ai/mcp"
+      ]
+    },
     "centy": {
       "args": [
         "-y",
