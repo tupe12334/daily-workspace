@@ -11,11 +11,11 @@ Fetch Fathom recordings for: **$ARGUMENTS**
 Use the Skill tool to invoke `work-date-resolver` with args `$ARGUMENTS`.
 Parse `DATE` from the output (YYYY-MM-DD).
 
-## Step 2 — Fetch meetings via MCP
+## Step 2 — Resolve identity and fetch meetings via MCP
 
-Call the Fathom MCP tool that lists meetings (typically `mcp__fathom__list_meetings` or similar — use whatever meeting-listing tool the `fathom` MCP server exposes). Filter by the resolved date. Request summaries and action items to be included.
+Call `mcp__fathom__get_identity` to get the authenticated user's email. Then call `mcp__fathom__list_meetings` filtered to that user's own recordings only.
 
-Pass date range: `from_date: DATE`, `to_date: DATE`.
+Pass: `created_after: DATE T00:00:00Z`, `created_before: DATE T23:59:59Z`, `recorded_by: [user_email]`, `include_summary: true`, `include_action_items: true`.
 
 If the MCP call fails or requires re-authentication, emit:
 ```
