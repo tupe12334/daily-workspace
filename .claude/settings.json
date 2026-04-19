@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(gh api:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh label:*)",
+      "Bash(gh *)",
+      "Skill(work-daily)",
+      "Skill(work-date-resolver)",
+      "Skill(work-github)",
+      "Skill(work-calendar)",
+      "Skill(work-gmail)",
+      "Skill(work-jira)",
+      "Skill(work-slack)",
+      "Skill(evening-focus)",
+      "Skill(work-identity)",
+      "Skill(skill-review)",
+      "mcp__claude_ai_Google_Calendar__list_calendars",
+      "mcp__claude_ai_Google_Calendar__list_events",
+      "mcp__claude_ai_Gmail__search_threads",
+      "mcp__claude_ai_Gmail__get_thread",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__centy__centy_v1_CentyDaemon_IsInitialized",
+      "mcp__centy__centy_v1_CentyDaemon_Init",
+      "mcp__centy__centy_v1_CentyDaemon_ListItemTypes",
+      "mcp__centy__centy_v1_CentyDaemon_CreateItemType",
+      "mcp__centy__centy_v1_CentyDaemon_SearchItems",
+      "mcp__centy__centy_v1_CentyDaemon_CreateItem",
+      "mcp__centy__centy_v1_CentyDaemon_UpdateItem"
+    ]
+  }
+}
