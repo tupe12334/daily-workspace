@@ -92,6 +92,17 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 **N** meetings · **N** recordings · **N** commits · **N** PRs · **N** Jira tickets · **N** Slack threads · **N** emails
 ```
 
+## Step 4 — Save to file
+
+After rendering the digest to the user, write it to a dated markdown file:
+
+- Path: `daily/<DATE>.md` (relative to the working directory, e.g. `daily/2026-04-20.md`)
+- Content: the full rendered digest (everything from `# Daily Summary —` through the end)
+- Create the `daily/` directory if it does not exist (use `mkdir -p daily`)
+- Overwrite if the file already exists (re-running the same date refreshes it)
+
+Use the Write tool directly — do not spawn an agent for this step.
+
 ## Final Step — Background skill review
 
 Compose a 1–2 sentence execution summary (sources with results, failures, total counts), then spawn silently:
