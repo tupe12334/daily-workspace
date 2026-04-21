@@ -90,6 +90,11 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 
 ## Day at a Glance
 **N** meetings · **N** recordings · **N** commits · **N** PRs · **N** Jira tickets · **N** Slack threads · **N** emails
+
+---
+
+## Standup Summary
+Two sentences, written to be spoken aloud in a daily standup meeting. Sentence 1: what you accomplished (key code shipped, decisions made, or meetings that moved things forward). Sentence 2: what you're focused on next or any blockers, drawn from open Jira tickets, open PRs, or pending action items. Concise, first-person, no jargon, natural spoken English.
 ```
 
 ## Step 4 — Save to file
