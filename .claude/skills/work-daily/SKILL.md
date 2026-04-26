@@ -94,7 +94,12 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 ---
 
 ## Standup Summary
-Two sentences, written to be spoken aloud in a daily standup meeting. Sentence 1: what you accomplished (key code shipped, decisions made, or meetings that moved things forward). Sentence 2: what you're focused on next or any blockers, drawn from open Jira tickets, open PRs, or pending action items. Concise, first-person, no jargon, natural spoken English.
+Bullet points — one per notable item. Cover: key code shipped (commits/PRs merged), meeting outcomes that moved things forward, open PRs or Jira tickets in flight, blockers or pending action items. Concise fragments, no jargon. Example:
+- Merged X into Y
+- Reviewed Z (merged)
+- Open PR: [title] — awaiting review
+- Daily sync: [key outcome]
+- Action items: [what's next]
 ```
 
 ## Step 4 — Save to file
