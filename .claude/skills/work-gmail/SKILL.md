@@ -2,6 +2,7 @@
 name: work-gmail
 description: Fetch key Gmail emails (sent and received important) for a given work day. Usable standalone or as a subagent from work-daily.
 argument-hint: "['today' | 'yesterday' | 'YYYY-MM-DD' | empty → last working day]"
+user-invocable: false
 ---
 
 Fetch Gmail activity for: **$ARGUMENTS**
@@ -17,14 +18,17 @@ Parse `DATE`, `GMAIL_DATE`, `GMAIL_NEXT_DATE` from the output.
 Use `search_threads` (not `search_messages`):
 
 **Sent emails:**
+
 - `query: "from:me after:GMAIL_DATE before:GMAIL_NEXT_DATE"`
 
 **Received important:**
+
 - `query: "to:me is:important after:GMAIL_DATE before:GMAIL_NEXT_DATE"`
 
 For received: read 3–5 threads (using `get_thread`) to extract subject and key point.
 
 **Skip:**
+
 - Newsletters, marketing emails, automated notifications, calendar invites, CI/CD alerts
 - Emails with no actionable content
 

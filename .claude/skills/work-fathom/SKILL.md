@@ -2,6 +2,7 @@
 name: work-fathom
 description: Fetch Fathom meeting recordings with AI summaries and action items for a given work day. Usable standalone or as a subagent from work-daily.
 argument-hint: "['today' | 'yesterday' | 'YYYY-MM-DD' | empty → last working day]"
+user-invocable: false
 ---
 
 Fetch Fathom recordings for: **$ARGUMENTS**
@@ -18,11 +19,13 @@ Call `mcp__fathom__get_identity` to get the authenticated user's email. Then cal
 Pass: `created_after: DATE T00:00:00Z`, `created_before: DATE T23:59:59Z`, `recorded_by: [user_email]`, `include_summary: true`, `include_action_items: true`.
 
 If the MCP call fails or requires re-authentication, emit:
+
 ```
 FATHOM_RESULT
 DATE: <DATE>
 ERROR: Fathom MCP unavailable — re-run to trigger OAuth if this is first use
 ```
+
 And stop.
 
 ## Step 3 — Enrich with summaries and action items (if not included)
@@ -53,6 +56,7 @@ ACTION ITEMS:
 ```
 
 If no meetings found:
+
 ```
 FATHOM_RESULT
 DATE: <DATE>

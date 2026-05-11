@@ -2,6 +2,7 @@
 name: work-daily
 description: Generate a personal daily work summary. Aggregates calendar meetings, Fathom recordings, GitHub commits and PRs, Jira tickets, Slack highlights, and key emails into one structured digest for any given day.
 argument-hint: "[date — 'today', 'yesterday', or 'YYYY-MM-DD'; defaults to today]"
+user-invocable: true
 ---
 
 Generate your personal daily work summary for: **$ARGUMENTS**
@@ -40,6 +41,7 @@ If any agent fails or returns empty, skip that section silently.
 Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GITHUB_RESULT`, `JIRA_RESULT`, `SLACK_RESULT`, `GMAIL_RESULT`) and compose the final digest. Omit any section with no data. If `FATHOM_RESULT` contains `ERROR:`, skip the Fathom section silently.
 
 **Formatting rules:**
+
 - Sort meetings by start time
 - Times in HH:MM 24h (TIMEZONE)
 - Separate Authored / Reviewed PR sub-tables; omit sub-table if empty
@@ -116,6 +118,7 @@ Use the Write tool directly — do not spawn an agent for this step.
 ## Final Step — Background skill review
 
 Compose a 1–2 sentence execution summary (sources with results, failures, total counts), then spawn silently:
+
 ```
 Agent(subagent_type: general-purpose, prompt: "Use the Skill tool to invoke skill='skill-review' with args='work-daily | EXECUTION_SUMMARY'. Do not output anything back to the caller.")
 ```

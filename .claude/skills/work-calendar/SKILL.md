@@ -2,6 +2,7 @@
 name: work-calendar
 description: Fetch Google Calendar events for a given work day. Usable standalone or as a subagent from work-daily.
 argument-hint: "['today' | 'yesterday' | 'YYYY-MM-DD' | empty → last working day]"
+user-invocable: false
 ---
 
 Fetch calendar events for: **$ARGUMENTS**
@@ -16,6 +17,7 @@ Parse `DATE`, `DATE_LABEL`, `DATE_START`, `DATE_END` from the output.
 ## Step 2 — Fetch events
 
 Call `list_events` (Google Calendar MCP):
+
 - `calendarId: CALENDAR_ID`
 - `startTime: DATE_START`
 - `endTime: DATE_END`
@@ -24,6 +26,7 @@ Call `list_events` (Google Calendar MCP):
 - `orderBy: startTime`
 
 **Keep only work-relevant events.** Exclude:
+
 - `eventType: outOfOffice` or `eventType: workingLocation`
 - Personal events with no work context
 - Company-wide ceremonies: all-hands, team happy hours, holidays, birthday events

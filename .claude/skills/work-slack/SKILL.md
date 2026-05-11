@@ -1,6 +1,7 @@
 ---
 name: work-slack
 description: Fetch Slack highlights (messages sent and mentions received) for a given work day. Usable standalone or as a subagent from work-daily.
+user-invocable: false
 argument-hint: "['today' | 'yesterday' | 'YYYY-MM-DD' | empty → last working day]"
 ---
 
@@ -12,6 +13,7 @@ Fetch Slack activity for: **$ARGUMENTS**
 Parse `DATE` from the output.
 
 **Slack user ID:** If `SLACK_USER_ID` is provided in context, use it directly. Otherwise:
+
 1. Run `gh api user --jq '{email: .email, name: .name}'` to get the GitHub user's email and name.
 2. Call `slack_search_users` with `query: <email>`. Find the matching entry and store its `id` as `SLACK_USER_ID`.
 3. If email lookup returns no match, retry with `query: <name>`.
@@ -21,12 +23,15 @@ Parse `DATE` from the output.
 Use `slack_search_public_and_private`:
 
 **Sent messages:**
+
 - `query: "from:<@SLACK_USER_ID> on:DATE"`
 
 **Mentions:**
+
 - `query: "<@SLACK_USER_ID> on:DATE"`
 
 **Filter out:**
+
 - Bot messages and automated notifications
 - Single-emoji reactions and reaction-only threads
 - Off-topic / non-work channels (e.g. `#random`, `#general-social`)

@@ -2,6 +2,7 @@
 name: work-jira
 description: Fetch Jira tickets updated on a given work day for the current user in the Guidde Atlassian workspace. Usable standalone or as a subagent from work-daily.
 argument-hint: "['today' | 'yesterday' | 'YYYY-MM-DD' | empty → last working day]"
+user-invocable: false
 ---
 
 Fetch Jira tickets for: **$ARGUMENTS**
@@ -17,6 +18,7 @@ Store the UUID as `JIRA_CLOUD_ID`. **Use the UUID field — NOT the hostname** (
 ## Step 2 — Query Jira
 
 Call `searchJiraIssuesUsingJql`:
+
 - `cloudId: JIRA_CLOUD_ID`
 - `jql: "assignee = currentUser() AND updated >= 'DATE' ORDER BY updated DESC"`
 - `maxResults: 20`
