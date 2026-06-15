@@ -34,11 +34,14 @@ Agent({ description: "Gmail",    prompt: "Use the Skill tool to invoke skill='wo
 
 Replace `<CALENDAR_ID>`, `<TIMEZONE>`, `<GITHUB_USER>`, `<GITHUB_ORG>`, `<SLACK_USER_ID>` with the actual resolved values before spawning.
 
-If any agent fails or returns empty, skip that section silently.
+Distinguish a confirmed-empty result from a failure:
+
+- If an agent returns a clean, confirmed-empty result, omit that section silently.
+- If an agent **fails** — it errors, hits an auth/permission problem, or returns a malformed/unexpected shape rather than a clean empty result — render a one-line diagnostic note in place of the section instead of omitting it silently. For example: `Slack: could not retrieve messages` or `Jira: could not fetch tickets (check Atlassian connection)`. This keeps a broken integration from being masked as a normal empty day.
 
 ## Step 3 — Synthesize and render
 
-Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GITHUB_RESULT`, `JIRA_RESULT`, `SLACK_RESULT`, `GMAIL_RESULT`) and compose the final digest. Omit any section with no data. If `FATHOM_RESULT` contains `ERROR:`, skip the Fathom section silently.
+Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GITHUB_RESULT`, `JIRA_RESULT`, `SLACK_RESULT`, `GMAIL_RESULT`) and compose the final digest. Omit any section whose result is confirmed-empty. If a result indicates a failure rather than a clean empty (an error marker, auth/permission problem, or malformed shape), render the one-line diagnostic note from Step 2 in place of that section instead of omitting it. If `FATHOM_RESULT` contains `ERROR:`, skip the Fathom section silently.
 
 **Formatting rules:**
 
