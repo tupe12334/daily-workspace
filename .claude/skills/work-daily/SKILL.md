@@ -46,7 +46,7 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 - Times in HH:MM 24h (TIMEZONE)
 - Separate Authored / Reviewed PR sub-tables; omit sub-table if empty
 - Skip Slack bot noise and single-emoji threads
-- Skip email newsletters and auto-notifications
+- Skip email newsletters and auto-notifications. If emails were fetched but **all** of them were filtered out this way, add a parenthetical note under Key Emails (e.g. `(5 auto-notifications skipped)`) so a checked-but-filtered Gmail is distinguishable from no email at all
 - For Fathom: show summaries as blockquotes; group action items under each meeting title; omit meeting if summary and action items are both empty
 
 ```
@@ -89,6 +89,7 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 ## Key Emails
 - **→** Subject → Recipient — key ask
 - **←** Subject ← Sender — action required
+> (N auto-notifications skipped) ← only when emails were fetched but all were filtered out
 
 ## Day at a Glance
 **N** meetings · **N** recordings · **N** commits · **N** PRs · **N** Jira tickets · **N** Slack threads · **N** emails
