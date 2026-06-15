@@ -44,7 +44,7 @@ Parse each provider's structured block (`CALENDAR_RESULT`, `FATHOM_RESULT`, `GIT
 
 - Sort meetings by start time
 - Times in HH:MM 24h (TIMEZONE)
-- Separate Authored / Reviewed PR sub-tables; omit sub-table if empty
+- Separate Authored / Reviewed PR sub-tables. A PR can appear in both the authored and reviewed lists — **remove from the Reviewed sub-table any PR whose number already appears in the Authored sub-table** (a self-reviewed PR is shown only under Authored). Omit either sub-table if it is empty after this de-dup
 - Skip Slack bot noise and single-emoji threads
 - Skip email newsletters and auto-notifications
 - For Fathom: show summaries as blockquotes; group action items under each meeting title; omit meeting if summary and action items are both empty
