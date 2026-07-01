@@ -10,3 +10,7 @@ Open Claude Code in this directory and use any skill directly:
 /work-daily
 /work-github yesterday
 ```
+
+## See also
+
+- [moadim](https://moadim.io/) — loop engineering: build, schedule & run agent loops.
