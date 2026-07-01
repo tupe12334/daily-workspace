@@ -42,5 +42,27 @@
       "WebSearch",
       "mcp__fathom__get_meeting_transcript"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx block-no-verify"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__github__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx block-no-verify"
+          }
+        ]
+      }
+    ]
   }
 }
