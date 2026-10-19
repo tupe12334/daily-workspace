@@ -7,12 +7,6 @@
         "https://api.fathom.ai/mcp"
       ]
     },
-    "centy": {
-      "args": [
-        "-y",
-        "centy-mcp"
-      ],
-      "command": "npx"
-    }
+    "centy": {"type": "http", "url": "http://127.0.0.1:50052/mcp"}
   }
 }
